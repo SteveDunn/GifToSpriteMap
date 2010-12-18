@@ -120,14 +120,17 @@
   </ItemGroup>
   <Import Project="..\..\wraps\openwrap\build\OpenWrap.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>XCOPY /D /Y /R "$(SolutionDir)..\lib\devil.dll"  "$(TargetDir)"
+    <PostBuildEvent>XCOPY /D /Y /R "$(ProjectDir)..\..\lib\devil.dll"  "$(TargetDir)"
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
   -->
+  <Target Name="AfterBuild">
+      <Message Text="[built('bin-net35', '..\lib\DevIL.dll]" />
+
+  </Target>
+  
 </Project>
