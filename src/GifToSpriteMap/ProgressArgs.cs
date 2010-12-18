@@ -6,32 +6,31 @@ namespace GifToSpriteMap
 	public class ProgressArgs
 		:EventArgs
 	{
-		ProgressEvent _progressEvent ;
-		string _message ;
-		Image _image ;
-
 		public ProgressArgs( ProgressEvent progressEvent,
 			string message,
 			Image image )
 		{
-			_progressEvent = progressEvent ;
-			_message = message ;
-			_image = image ;
+			ProgressEvent = progressEvent ;
+			Message = message ;
+			Image = image ;
 		}
 
 		public ProgressEvent ProgressEvent
 		{
-			get { return _progressEvent ; }
+			get ;
+			private set ;
 		}
 
 		public string Message
 		{
-			get { return _message ; }
+			get ;
+			private set ;
 		}
 
 		public Image Image
 		{
-			get { return _image ; }
+			get ;
+			private set ;
 		}
 	}
 }

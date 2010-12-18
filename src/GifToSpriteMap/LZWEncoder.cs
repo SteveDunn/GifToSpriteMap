@@ -21,7 +21,7 @@
 using System;
 using System.IO;
 
-namespace NGif
+namespace GifToSpriteMap.NGif
 {
 	public class LZWEncoder 
 	{

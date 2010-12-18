@@ -115,6 +115,9 @@
     <EmbeddedResource Include="TestImage1.gif" />
     <EmbeddedResource Include="TestImage2.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NGif\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>XCOPY /D /Y /R "$(SolutionDir)..\lib\devil.dll"  "$(TargetDir)"

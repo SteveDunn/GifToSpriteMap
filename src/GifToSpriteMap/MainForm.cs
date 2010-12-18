@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Linq ;
 using System.Windows.Forms;
 
 namespace GifToSpriteMap
@@ -101,12 +101,7 @@ namespace GifToSpriteMap
 		{
 			var selectedIndex = listBoxPaths.SelectedIndex;
 			
-			var paths = new List<string>();
-			
-			foreach (string s in listBoxPaths.SelectedItems)
-			{
-				paths.Add(s);
-			}
+			var paths = listBoxPaths.SelectedItems.Cast<string>( ).ToList( ) ;
 
 			foreach (string s in paths)
 			{
@@ -132,7 +127,7 @@ namespace GifToSpriteMap
 			listBoxPaths.SelectedIndex = n;
 		}
 
-		private void uiComboOutputAs_SelectedIndexChanged(object sender, EventArgs e)
+		void uiComboOutputAsSelectedIndexChanged(object sender, EventArgs e)
 		{
 			bool isDdsFormat = uiComboOutputAs.Text == OutputFormat.Dds.ToString( ) ;
 			comboBoxShape.Enabled = !isDdsFormat ;

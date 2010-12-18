@@ -77,7 +77,7 @@ namespace GifToSpriteMap
 			var imageExtractor = new ImageExtractor();
 			imageExtractor.Progress += onProgress;
 
-			Image image = imageExtractor.Extract(_paths, _destinationShape, _outputFormat);
+			Image image = imageExtractor.Extract(_paths, _destinationShape);
 
 			if (_outputFormat == OutputFormat.Bitmap)
 			{

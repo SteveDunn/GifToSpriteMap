@@ -41,7 +41,7 @@ using System.IO;
  */
 #endregion
 
-namespace NGif
+namespace GifToSpriteMap.NGif
 {
 	public class AnimatedGifEncoder
 	{

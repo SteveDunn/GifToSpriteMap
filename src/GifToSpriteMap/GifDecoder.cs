@@ -43,7 +43,7 @@ using System.IO ;
 
 #pragma warning disable 0675
 
-namespace NGif
+namespace GifToSpriteMap.NGif
 {
 	public class GifDecoder 
 	{

@@ -152,7 +152,7 @@ namespace GifToSpriteMap
 		this.uiComboOutputAs.Name = "uiComboOutputAs";
 		this.uiComboOutputAs.Size = new System.Drawing.Size(74, 21);
 		this.uiComboOutputAs.TabIndex = 7;
-		this.uiComboOutputAs.SelectedIndexChanged += new System.EventHandler(this.uiComboOutputAs_SelectedIndexChanged);
+		this.uiComboOutputAs.SelectedIndexChanged += new System.EventHandler(this.uiComboOutputAsSelectedIndexChanged);
 		// 
 		// label3
 		// 

@@ -1,13 +1,13 @@
 ﻿using System ;
 
-namespace NGif
+namespace GifToSpriteMap.NGif
 {
 	public class GifDecoderEventArgs
 		: EventArgs
 	{
-		GifFrame _frame;
-		int _frameNumber ;
-		int _frameCount ;
+		readonly GifFrame _frame;
+		readonly int _frameNumber ;
+		readonly int _frameCount ;
 
 		public int FrameNumber
 		{

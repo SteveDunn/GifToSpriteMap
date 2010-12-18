@@ -1,6 +1,6 @@
 ﻿using System.Drawing ;
 
-namespace NGif
+namespace GifToSpriteMap.NGif
 {
 	public class GifFrame
 	{
@@ -9,7 +9,9 @@ namespace NGif
 			image = im;
 			delay = del;
 		}
+		
 		public Image image;
+		
 		public int delay;
 	}
 }

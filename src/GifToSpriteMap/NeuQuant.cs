@@ -39,7 +39,7 @@
 
 using System;
 
-namespace NGif
+namespace GifToSpriteMap.NGif
 {
 	public class NeuQuant 
 	{

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using NGif;
+using GifToSpriteMap.NGif;
 
 namespace GifToSpriteMap
 {
@@ -10,7 +10,7 @@ namespace GifToSpriteMap
 	{
 		public event ImageExtractionHandler Progress;
 
-		public Image Extract(string[] pathsToAnimatedGif, DestinationShape destinationShape, OutputFormat outputFormat)
+		public Image Extract(string[] pathsToAnimatedGif, DestinationShape destinationShape)
 		{
 			var streams = new Stream[pathsToAnimatedGif.Length];
 
@@ -58,13 +58,13 @@ namespace GifToSpriteMap
 				count++;
 			}
 
-			return CombineImages(images, destinationShape);
+			return combineImages(images, destinationShape);
 		}
 
-		public static Image CombineImages(List<Image> images,
+		static Image combineImages(List<Image> images,
 		  DestinationShape destinationShape)
 		{
-			Point destPoint = new Point(0, 0);
+			var destPoint = new Point(0, 0);
 			Size destSize = getCombinedExtent(images, destinationShape);
 
 			Image outputImage = new Bitmap(destSize.Width, destSize.Height);
@@ -89,20 +89,22 @@ namespace GifToSpriteMap
 
 		public Image Extract(string pathToAnimatedGif, DestinationShape destinationShape)
 		{
-			return Extract(new string[] { pathToAnimatedGif }, destinationShape, OutputFormat.Bitmap);
+			return Extract(new[] { pathToAnimatedGif }, destinationShape);
 		}
 
 		public Image Extract(Stream streamOfAnimatedGif, DestinationShape destinationShape)
 		{
-			return Extract(new Stream[] { streamOfAnimatedGif }, destinationShape);
+			return Extract(new[] { streamOfAnimatedGif }, destinationShape);
 		}
 
-		static Size getCombinedExtent(List<Image> images, DestinationShape destinationShape)
+		static Size getCombinedExtent(IList<Image> images, DestinationShape destinationShape)
 		{
 			if (images.Count == 1)
+			{
 				return new Size(images[0].Width, images[0].Height);
+			}
 
-			Point destPoint = new Point(0, 0);
+			var destPoint = new Point(0, 0);
 
 			int maxWidth = 0;
 			int maxHeight = 0;
@@ -129,7 +131,8 @@ namespace GifToSpriteMap
 			int imageWidth = frames.Count * frameSize.Width;
 			int imageHeight = frameSize.Height;
 
-			int squareSize = (int)Math.Sqrt(frames.Count);
+			var squareSize = (int)Math.Sqrt(frames.Count);
+			
 			if (shape == DestinationShape.Square)
 			{
 				imageWidth = squareSize * frameSize.Width;
@@ -149,15 +152,15 @@ namespace GifToSpriteMap
 			Image outputImage =
 			  new Bitmap(imageWidth, imageHeight);
 
-			Graphics g = Graphics.FromImage(outputImage);
+			Graphics graphics = Graphics.FromImage(outputImage);
 
-			Point destPoint = new Point(0, 0);
+			var destPoint = new Point(0, 0);
 
 			for (int i = 0; i < frames.Count; i++)
 			{
 				Frame currentFrame = frames[i];
 
-				g.DrawImage(currentFrame.Image, destPoint);
+				graphics.DrawImage(currentFrame.Image, destPoint);
 
 				if (shape == DestinationShape.Square)
 				{
@@ -178,40 +181,37 @@ namespace GifToSpriteMap
 			}
 
 
-			g.Save();
+			graphics.Save();
 
 			return outputImage;
 		}
 
-		//    List<Frame> getFrames(string path)
-		//    {
-		//      using( Stream s = File.OpenRead( path ) )
-		//        return getFrames( s ) ;
-		//    }
-
 		List<Frame> getFrames(Stream stream)
 		{
-			GifDecoder gifDecoder = new GifDecoder();
-			gifDecoder.FrameAdded += new GifDecoderEventHandler(gifDecoder_FrameAdded);
+			var gifDecoder = new GifDecoder();
+			gifDecoder.FrameAdded += gifDecoderFrameAdded;
 			gifDecoder.Read(stream);
 
 			int frameCount = gifDecoder.GetFrameCount();
 			Size frameSize = gifDecoder.GetFrameSize();
-			List<Frame> e = new List<Frame>(frameCount);
+			
+			var frames = new List<Frame>(frameCount);
 
 			for (int i = 0; i < frameCount; i++)
 			{
 				Image frame = gifDecoder.GetFrame(i);
-				e.Add(new Frame(frameSize, frame));
+				frames.Add(new Frame(frameSize, frame));
 			}
-			return e;
+			
+			return frames;
 		}
 
-		void gifDecoder_FrameAdded(object sender, GifDecoderEventArgs e)
+		void gifDecoderFrameAdded(object sender, GifDecoderEventArgs e)
 		{
 			if (Progress == null)
+			{
 				return;
-
+			}
 
 			Progress(this, new ProgressArgs(
 							  ProgressEvent.StartingToProcessFrameFromSourceImage,
