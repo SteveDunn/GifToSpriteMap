@@ -117,7 +117,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>XCOPY /D /Y /R $(SolutionDir)..\lib\devil.dll  $(TargetDir)  
+    <PostBuildEvent>XCOPY /D /Y /R "$(SolutionDir)..\lib\devil.dll"  "$(TargetDir)"
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

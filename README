@@ -1,0 +1,5 @@
+This is a tool to convert animated GIFs to spritemaps (a bitmap listing each frame). 
+
+The resulting Spritemap can be wither in .png format or in DirectDraw Surface (.dds) format.
+
+To use the tool, add one or more animated gifs and click go. The resulting bitmap/dds is saved to the Windows temporary directory and displayed.
