@@ -129,7 +129,7 @@
   </Target>
   -->
   <Target Name="AfterBuild">
-      <Message Text="[built('bin-net35', '..\lib\DevIL.dll]" />
+      <Message Text="[built('bin-net35', 'lib\DevIL.dll]" />
 
   </Target>
   
